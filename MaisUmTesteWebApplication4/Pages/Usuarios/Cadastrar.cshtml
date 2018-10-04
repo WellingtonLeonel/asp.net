@@ -1,0 +1,13 @@
+﻿@page
+@model MaisUmTesteWebApplication4.Pages.Usuarios.CadastrarModel
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h2>Cadastrar</h2>
+
+<form>
+    <input type="text" name="Naome" value="@Model.usuario.Nome" /><br />
+    <input type="password" name="Senha" /><br />
+    <button>Enviar</button>
+</form>
