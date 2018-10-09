@@ -7,7 +7,17 @@
 <h2>Cadastrar</h2>
 
 <form>
-    <input type="text" name="Nome" value="@Model.usuario.Nome" /><br />
-    <input type="password" name="Senha" /><br />
-    <button>Enviar</button>
+    <div class="form-group">
+        <label for="usuario.Nome">Nome</label>
+        <input type="text" name="Nome" value="@Model.usuario.Nome" class="form-control" placeholder="Nome" /><br />
+        <label for="usuario.Senha">Senha</label>
+        <input type="password" id="Senha" value="@Model.usuario.Nome" class="form-control" placeholder="Senha" /><br />
+        <label>ConfirmacaoSenha</label>
+        <input type="password" id="Confirmacao Senha" value="@Model.usuario.Nome" class="form-control" placeholder="Confirmacao Senha" /><br />
+        <label for="usuario.Email">Email</label>
+        <input type="text" name="Email" value="@Model.usuario.Nome" class="form-control" placeholder="Email" /><br />
+        <label for="usuario.CPF">CPF</label>
+        <input type="text" name="CPF" value="@Model.usuario.Nome" class="form-control" placeholder="CPF"/><br />
+        <button class="btn btn-primary">Enviar</button>
+    </div>
 </form>
