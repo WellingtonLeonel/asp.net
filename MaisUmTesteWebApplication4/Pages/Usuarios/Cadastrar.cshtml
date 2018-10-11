@@ -31,24 +31,48 @@
         <hr />
 
         <label>CEP</label>
-        <input type="text" name="CEP" class="form-control" placeholder="CEP" />
+        <input type="text" name="CEP" id="CEP" class="form-control" placeholder="CEP" />
         <button class="btn" type="button" onclick="buscaEndereco()"
-                data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Buscar </button>
+                aria-expanded="false" aria-controls="collapseExample">
+            Buscar
+        </button>
         <div class="collapse" id="collapseExemple">
-            <div class="card card-body" id="enter">
+            <div class="card card-body" id="ender">
 
                 texto qualquer
             </div>
 
         </div>
+        <div class="collapse" id="collapseForm">
+          <label>Endereço</label>
+            <input type="text" name="logradouro" id="logradouro"/>
+          
+            </div>
 
+        </div>
         <button class="btn btn-primary">Enviar</button>
     </div>
 </form>
 
 <script>
-    function buscarEndereco() {
-        $.getJSON("https://viacep.com.br/ws/01001000/json/", );
+    function buscaEndereco() {
+        let cep = document.querySelector("#CEP");
+        $.getJSON("https://viacep.com.br/ws/01001000/json/" + CEP.VALUE + "/json/",
+            function (resp) {
+                if (resp.erro) {
+                    // cep não encontrado
+                    document.querySelector("#ender").innerHTML = "cep não encontrado";
+                    $('#collapseExample').collapse('show');
+                    $('#collapseExample').collapse('hide');
+                } else {
+                    // preencha os campos de endereço
+                    document.querySelector("#logradouro").value=resp.logradouro;
+                    $('#collapseExample').collapse('hide');
+                    $('#collapseExample').collapse('show');
+                }
+               
+            });
+         
     }
     function valida() {
     
