@@ -3,91 +3,87 @@
 @{
     ViewData["Title"] = "Cadastrar";
 }
+<div class="container">
+    <h2>Cadastrar</h2>
 
-<h2>Cadastrar</h2>
+    <form onsubmit="return valida()">
+        <div class="form-group">
+            <label asp-for="usuario.Nome">Nome</label>
+            <input type="text" asp-for="usuario.Nome" class="form-control" placeholder="Nome" />
+            <span asp-validation-for="usuario.Nome" class="text-danger"></span> <br />
 
-<form onsubmit="return valida()">
+            <label for="usuario.Email">Email</label>
+            <input type="text" name="usuario.Email" value="@Model.usuario.Email" class="form-control" placeholder="Email" />
+            <label for="usuario.Cpf">Cpf</label>
+            <input type="text" name="usuario.Cpf" value="@Model.usuario.Cpf" class="form-control" placeholder="Cpf" />
+            <label for="usuario.DataNascimento">Data de Nascimento</label>
+            <input type="date" name="usuario.DataNascimento" value="@Model.usuario.DataNascimento" class="form-control" placeholder="DataNascimento" />
+            <label for="usuario.Senha">Senha</label>
+            <input type="password" id="senha" name="usuario.Senha" class="form-control" placeholder="Senha" />
+            <label>Confirmação</label>
+            <input type="password" id="confirmacao" class="form-control" placeholder="Senha" />
+            <hr />
+            <label asp-for="usuario.Cep">CEP</label>
+            <input type="text" asp-for="usuario.Cep" id="Cep" class="form-control" placeholder="CEP" />
+            <span asp-validation-for="usuario.Cep" class="text-danger"></span>
 
-    <div class="form-group">
-
-        <label for="usuario.Nome">Nome</label>
-        <input type="text" name="Nome" value="@Model.usuario.Nome" class="form-control" placeholder="Nome" /><br />
-
-        <label for="usuario.Senha">Senha</label>
-        <input type="password" id="Senha" class="form-control" placeholder="Senha" /><br />
-
-        <label>Confirmação de Senha</label>
-        <input type="password" id="ConfirmacaoSenha" class="form-control" placeholder="Confirmação de Senha" /><br />
-
-        <label for="usuario.Email">Email</label>
-        <input type="text" name="Email" value="@Model.usuario.Email" class="form-control" placeholder="Email" /><br />
-
-        <label for="usuario.CPF">CPF</label>
-        <input type="text" name="CPF" value="@Model.usuario.CPF" class="form-control" placeholder="CPF" /><br />
-
-        <label for="usuario.Data de Nascimento">Data de Nascimento</label>
-        <input type="date" name="Data Nascimento" class="form-control" placeholder="Data de Nascimento" /><br />
-
-        <hr />
-
-        <label>CEP</label>
-        <input type="text" name="CEP" id="cep" class="form-control" placeholder="CEP" />
-        <button class="btn" type="button" onclick="buscaEndereco()"
-                aria-expanded="false" aria-controls="collapseExample">Buscar</button>
-        <div class="collapse" id="collapseExemple">
-            <div class="card card-body" id="ender">
-
-                texto qualquer
+            <button class="btn" type="button" onclick="buscaEndereco()">Buscar</button>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body" id="ender">
+                    texto qualquer
+                </div>
             </div>
-
-        </div>
-        <div class="collapse" id="collapseForm">
-          <label>Endereço</label>
-            <input type="text" name="logradouro" id="logradouro"/>
-          
+            <div class="collapse" id="collapseForm">
+                <label>Endereço</label>
+                <input type="text" name="usuario.Logradouro" id="logradouro" class="form-control" />
+                <label>Numero</label>
+                <input type="text" name="usuario.Numero" class="form-control" />
+                <label>Complemento</label>
+                <input type="text" name="usuario.Complemento" class="form-control" />
+                <label>Bairro</label>
+                <input type="text" name="usuario.Bairro" id="bairro" class="form-control" />
+                <label>Cidade</label>
+                <input type="text" name="usuario.Cidade" id="cidade" class="form-control" />
+                <label>UF</label>
+                <input type="text" name="usuario.Uf" id="uf" class="form-control" />
             </div>
-
+            <hr />
+            <button class="btn btn-primary">Enviar</button>
         </div>
-    <div>
-        <button class="btn btn-primary">Enviar</button>
-    </div>
-</form>
-
+    </form>
+</div>
 <script>
     function buscaEndereco() {
-        let cep = document.querySelector("#cep");
-        $.getJSON("https://viacep.com.br/ws/" + cep.value + "/json",
+        let cep = document.querySelector("#Cep");
+        $.getJSON("https://viacep.com.br/ws/" + cep.value + "/json/",
             function (resp) {
                 if (resp.erro) {
                     // cep não encontrado
-                    document.querySelector("#ender").innerHTML = "cep não encontrado";
+                    document.querySelector("#ender").innerHTML = "Cep não encontrado";
                     $('#collapseExample').collapse('show');
                     $('#collapseForm').collapse('hide');
                 } else {
-                    // preencha os campos de endereço
-                    document.querySelector("#logradouro").value=resp.logradouro;
+                    // preenche os campos do endereço
+                    document.querySelector("#logradouro").value = resp.logradouro;
+                    document.querySelector("#bairro").value = resp.bairro;
+                    document.querySelector("#cidade").value = resp.localidade;
+                    document.querySelector("#uf").value = resp.uf;
                     $('#collapseExample').collapse('hide');
                     $('#collapseForm').collapse('show');
                 }
-               
             });
-         
     }
     function valida() {
-    
-    let Senha = document.getElementById("Senha");
-    let ConfirmacaoSenha = document.getElementById("ConfirmacaoSenha");
-
-   
-   if (Senha.value.length <4){
-   alert("A senha deve ter pelo menos 4 caracteres");
-       return false;                 
-   }
- 
-   if (Senha.value != ConfirmacaoSenha.value){
-       alert("As senhas devem ser iguais");
-       return false;                     
+        let senha = document.getElementById("senha");
+        let confirmacao = document.getElementById("confirmacao");
+        if (senha.value.length < 4) {
+            alert("A Senha deve ter pelo menos 4 caracteres");
+            return false;
+        }
+        if (senha.value != confirmacao.value) {
+            alert("A Senha e a confirmacao devem ser iguais");
+            return false;
+        }
+        return true;
     }
-    return true;
-    }
-</script> 
+</script>

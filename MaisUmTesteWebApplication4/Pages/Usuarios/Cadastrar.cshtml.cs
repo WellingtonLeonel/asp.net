@@ -10,7 +10,7 @@ namespace MaisUmTesteWebApplication4.Pages.Usuarios
 {
     public class CadastrarModel : PageModel
     {
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public Usuario usuario { get; set; }
         public void OnGet(string nome, string senha)
         {
@@ -19,8 +19,6 @@ namespace MaisUmTesteWebApplication4.Pages.Usuarios
                 usuario = new Usuario();
 
             }
-            usuario.Nome = nome;
-            usuario.Senha = senha;
         }
     }
 }

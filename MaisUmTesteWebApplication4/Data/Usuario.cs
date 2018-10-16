@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,11 +9,21 @@ namespace MaisUmTesteWebApplication4.Data
     public class Usuario
     {
         public int UsuarioId { get; set; }
+        [Required(ErrorMessage="Nome é obrigatório")]
+        [MaxLength(30, ErrorMessage = "Nome pode conter no máximo 30 letras")]
         public string Nome { get; set; }
         public string Senha { get; set; }
-        public string ComfirmacaoSenha { get; set; }
         public string Email { get; set; }
-        public string CPF { get; set; }
-        public String  DataNascimento { get; set; }
+        [DataType(DataType.Date)]
+        public DataType DataNascimento { get; set; }
+        public string Cpf { get; set; }
+        [RegularExpression("@/d/d/d/d/d/-/d/d/d", ErrorMessage = "cep deve estar no seguinte formato 00000-000")]
+        public string Cep { get; set; }
+        public string Logradouro { get; set; }
+        public string Numero { get; set; }
+        public string Complemento { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string Uf { get; set; }
     }
 }
