@@ -16,6 +16,7 @@ namespace MaisUmTesteWebApplication4.Data
         public string Email { get; set; }
         [DataType(DataType.Date)]
         public DataType DataNascimento { get; set; }
+        [RegularExpression("@/d/d/d/./d/d/d/./d/d/d/-/d/d", ErrorMessage = "CPF deve estar no seguinte formato 000.000.000-00")]
         public string Cpf { get; set; }
         [RegularExpression("@/d/d/d/d/d/-/d/d/d", ErrorMessage = "cep deve estar no seguinte formato 00000-000")]
         public string Cep { get; set; }

@@ -14,8 +14,11 @@
 
             <label for="usuario.Email">Email</label>
             <input type="text" name="usuario.Email" value="@Model.usuario.Email" class="form-control" placeholder="Email" />
-            <label for="usuario.Cpf">Cpf</label>
-            <input type="text" name="usuario.Cpf" value="@Model.usuario.Cpf" class="form-control" placeholder="Cpf" />
+
+            <label asp-for="usuario.Cpf">CPF</label>
+            <input type="text" asp-for="usuario.Cpf"  class="form-control" placeholder="CPF" />
+            <span asp-validation-for="usuario.Cpf" class="text-danger"></span> <br />
+
             <label for="usuario.DataNascimento">Data de Nascimento</label>
             <input type="date" name="usuario.DataNascimento" value="@Model.usuario.DataNascimento" class="form-control" placeholder="DataNascimento" />
             <label for="usuario.Senha">Senha</label>
