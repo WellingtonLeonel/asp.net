@@ -18,8 +18,7 @@ namespace MaisUmTesteWebApplication4.Pages.Usuarios
 
         public void OnPost(int cpf)
         {
-            List<Usuario> usuarios = CadastrarModel.usuarios;
-            foreach (Usuario u in usuarios)
+           
             {
                 if (cpf.Equals(u.Cpf))
                 {
